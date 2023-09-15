@@ -29,7 +29,7 @@ jobs:
 
       - name: Build Static Page
         run: |
-          mkdocs build -c
+          mkdocs build -c -v
 
       - name: Upload to Webspace
         env:
