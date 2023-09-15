@@ -34,4 +34,11 @@ jobs:
       - name: Deploy mkdocs
         run: |
           mkdocs build -c
-
+      - name: rsync
+        env:
+          FTP_USER: ${{ secrets.FTPUSER }}
+          FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
+          SERVER: ${{ secrets.SERVER }}
+        run: |
+          apt install lftp
+          lftp -e "mirror -R site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
