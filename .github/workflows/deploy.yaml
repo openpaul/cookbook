@@ -21,6 +21,16 @@ jobs:
         with:
           python-version: 3.11.x
 
+      - name: TEST
+        env:
+          FTP_USER: ${{ secrets.FTPUSER }}
+          FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
+          SERVER: ${{ secrets.SERVER }}
+          TESTSECRET: ${{ secrets.TESTSECRET }}
+        run: |
+          echo "Uploading to webspace"
+          echo $TESTSECRET
+
       - name: Install dependencies
         run: |
           sudo apt install -y lftp
