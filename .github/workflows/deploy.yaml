@@ -35,4 +35,6 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
+          echo "Uploading to webspace"
+          lftp --version
           lftp -e "mirror -R /home/runner/work/cookbook/cookbook/site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
