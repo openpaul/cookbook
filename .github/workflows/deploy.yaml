@@ -27,17 +27,16 @@ jobs:
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
           pip install mkdocs mkdocs-material
 
-      - name: Build Static Page
-        run: |
-          mkdocs build -c -v
-          ls -lah site
-
-      - name: Upload to Webspace
+      - name: Build and Upload to Webspace
         env:
           FTP_USER: ${{ secrets.FTPUSER }}
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
-          echo "Uploading to webspace"
           chmod +x  .github/sftp_upload.sh
+
+          mkdocs build -c
+          
+          ls -lah site
+          
           ./.github/sftp_upload.sh
