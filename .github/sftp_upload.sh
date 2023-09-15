@@ -9,6 +9,8 @@ set user $env(FTP_USER)
 
 # Execute the SCP command with password handling
 spawn  bash -c "scp -r site/* '$user'@$server:"
+expect "Please type 'yes', 'no' or the fingerprint:"
+send "yes\r"
 expect ".*password:"
 send "$password\r"
 expect eof
