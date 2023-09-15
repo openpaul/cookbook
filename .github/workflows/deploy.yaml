@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: 3.11.x
 
-      - name: Install mkdocs-material
+      - name: Install dependencies
         run: |
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
           pip install \
@@ -31,14 +31,14 @@ jobs:
             mkdocs-git-committers-plugin-2 \
             mkdocs-git-revision-date-localized-plugin
 
-      - name: Deploy mkdocs
+      - name: Build Static Page
         run: |
           mkdocs build -c
-      - name: rsync
+      - name: Upload to Webspace
         env:
           FTP_USER: ${{ secrets.FTPUSER }}
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
-          apt install lftp
+          sudo apt install lftp
           lftp -e "mirror -R site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
