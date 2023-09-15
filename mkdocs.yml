@@ -1,0 +1,31 @@
+site_name: Cookbook
+site_url: http://cookbook.paulsaary.de
+
+
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+    logo: fontawesome/solid/bowl-rice
+  #favicon: assets/images/favicon.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - navigation.tracking
+    - navigation.expand
+    - navigation.top
+
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji 
+      emoji_generator: !!python/name:materialx.emoji.to_svg
