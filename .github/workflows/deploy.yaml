@@ -39,4 +39,4 @@ jobs:
           
           cd site
           ls -lah
-          ./.github/sftp_upload.sh
+          ../.github/sftp_upload.sh
