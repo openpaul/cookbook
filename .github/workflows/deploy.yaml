@@ -39,4 +39,4 @@ jobs:
         run: |
           echo "Uploading to webspace"
           lftp --version
-          lftp -e ""set ftp:sync-mode off; set ftp:use-stat-for-list on; mirror -R /home/runner/work/cookbook/cookbook/site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
+          lftp -e "set ftp:sync-mode off; set ftp:use-stat-for-list on; mirror -R /home/runner/work/cookbook/cookbook/site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
