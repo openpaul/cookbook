@@ -23,14 +23,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt install -y lftp
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
-          pip install \
-            mkdocs-material \
-            mkdocs-minify-plugin \
-            mkdocs-redirects \
-            mkdocs-git-committers-plugin-2 \
-            mkdocs-git-revision-date-localized-plugin
-
+          pip install mkdocs mkdocs-material
       - name: Build Static Page
         run: |
           mkdocs build -c
@@ -40,5 +35,4 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
-          sudo apt install lftp
           lftp -e "mirror -R site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
