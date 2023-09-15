@@ -37,6 +37,6 @@ jobs:
 
           mkdocs build -c
           
-          ls -lah site
-          
+          cd site
+          ls -lah
           ./.github/sftp_upload.sh
