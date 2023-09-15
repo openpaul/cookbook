@@ -40,4 +40,4 @@ jobs:
           cd site
           ls -lah
           sleep 2
-          ../.github/sftp_upload.sh
+          expect ../.github/sftp_upload.sh
