@@ -35,4 +35,4 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
-          lftp -e "mirror -R site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
+          lftp -e "mirror -R /home/runner/work/cookbook/cookbook/site/ .; quit" -p 22 -u $FTP_USER,$FTP_PASSWORD sftp://$SERVER
