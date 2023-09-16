@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build cook
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout main
         uses: actions/checkout@v3
@@ -36,4 +36,4 @@ jobs:
           mkdocs build -c
           chmod +x  .github/lftp.sh
           lftp --version
-          #bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
+          bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
