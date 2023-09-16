@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt install -y expect
+          sudo apt install -y lftp
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
           pip install mkdocs mkdocs-material
 
@@ -33,11 +33,5 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
-          chmod +x  .github/sftp_upload.sh
-
-          mkdocs build -c
-          
-          cd site
-          ls -lah
-          sleep 2
-          expect ../.github/sftp_upload.sh
+          chmod +x  .github/lftp.sh
+          .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
