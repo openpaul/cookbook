@@ -11,9 +11,10 @@ remote_password="$3"
 remote_host="$4"
 remote_folder="$5"
 
+ping -c 2 $remote_host
 
 SETTINGS="set net:timeout 5; set net:max-retries 5; set net:reconnect-interval-base 5; set ftp:ssl-force yes; set ftp:ssl-protect-data true; set sftp:auto-confirm yes; set ssl:verify-certificate no;"
 # Use lftp to synchronize the folders
 # https://stackoverflow.com/questions/49843692/continuous-deployment-using-lftp-gets-stuck-temporarily-after-about-10-files
 # https://forum.gitlab.com/t/deploy-with-lftp-uploads-all-files-even-unchanged-ones/35439
-lftp -e "$SETTINGS; ls; mirror -P 5 -R --verbose \"$local_folder\" \"$remote_folder\"; quit" -u "$remote_user","$remote_password" sftp://$remote_host
+lftp -p 22 -e "$SETTINGS; ls; mirror -P 5 -R --verbose \"$local_folder\" \"$remote_folder\"; quit" -u "$remote_user","$remote_password" sftp://$remote_host
