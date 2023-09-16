@@ -13,7 +13,7 @@ remote_folder="$5"
 
 ping -c 2 $remote_host
 
-SETTINGS="set net:timeout 5; set net:max-retries 5; set net:reconnect-interval-base 5; set ftp:ssl-force yes; set ftp:ssl-protect-data true; set sftp:auto-confirm yes; set ssl:verify-certificate no;"
+SETTINGS="set net:timeout 2; set net:max-retries 2; set net:reconnect-interval-base 2; set ftp:ssl-force yes; set ftp:ssl-protect-data true; set sftp:auto-confirm yes; set ssl:verify-certificate no;"
 # Use lftp to synchronize the folders
 # https://stackoverflow.com/questions/49843692/continuous-deployment-using-lftp-gets-stuck-temporarily-after-about-10-files
 # https://forum.gitlab.com/t/deploy-with-lftp-uploads-all-files-even-unchanged-ones/35439
@@ -25,3 +25,4 @@ if [ $exit_code -eq 0 ]; then
 else
     echo "Synchronization attempt $i failed. Error message: $output"
 fi
+echo $output

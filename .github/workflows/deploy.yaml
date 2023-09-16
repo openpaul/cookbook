@@ -35,4 +35,5 @@ jobs:
         run: |
           mkdocs build -c
           chmod +x  .github/lftp.sh
-          bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
+          lftp --version
+          #bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
