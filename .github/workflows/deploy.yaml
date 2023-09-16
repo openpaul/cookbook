@@ -33,5 +33,6 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
+          mkdocs build -c
           chmod +x  .github/lftp.sh
           .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
