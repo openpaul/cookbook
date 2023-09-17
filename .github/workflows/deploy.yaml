@@ -2,11 +2,8 @@
 name: ci
 on:
   push:
-    paths:
-      - "cook/**"
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build:
