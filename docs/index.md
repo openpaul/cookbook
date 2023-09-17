@@ -1,4 +1,8 @@
-# Home 
+---
+title: Home
+---
+
+# 🥗 Recipes 📖 
 
 ## About
 
