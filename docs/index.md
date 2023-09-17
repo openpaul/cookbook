@@ -2,7 +2,7 @@
 title: Home
 ---
 
-# 🥗 Recipes 📖 
+# :stew: Recipes 📖 
 
 ## About
 
