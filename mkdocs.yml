@@ -24,6 +24,8 @@ theme:
     - navigation.tracking
     - navigation.expand
     - navigation.top
+    - search.suggest
+    - search.highlight
 
 markdown_extensions:
   - pymdownx.emoji:

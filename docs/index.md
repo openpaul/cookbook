@@ -1,4 +1,6 @@
-# About
+# Home 
+
+## About
 
 This is a recipe collection written in cooklang.
 
