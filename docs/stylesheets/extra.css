@@ -15,7 +15,7 @@
 }
 /* add border for last row in tables in .md-typeset__table */
 .md-typeset__table table tr:last-child td {
-    border-bottom: 1px solid #ddd;
+    border-bottom: .05rem solid var(--md-typeset-table-color)
   }
 /* remove first row from tables in .md-typeset__table */
 .md-typeset__table table thead {
