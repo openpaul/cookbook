@@ -27,6 +27,10 @@ jobs:
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
           pip install mkdocs mkdocs-material
 
+      - name: Convert to markdown
+        run: |
+          pycook -i cook/ -o docs/
+
       - name: Build and Upload to Webspace
         env:
           FTP_USER: ${{ secrets.FTPUSER }}
