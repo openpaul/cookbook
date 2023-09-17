@@ -1,0 +1,27 @@
+/* cookbook stylesheet for extra styles */
+
+/* custom style for tables in .md-typeset__table */
+
+.md-typeset__table  table {
+  border: None !important; /* remove border from table */
+}
+
+.md-typeset__table table tr{
+    margin: 0px;
+    padding: 0px 5px 0px  5px !important; /* remove padding from table */
+}
+.md-typeset table:not([class]) td {
+    padding: .3em 1em
+}
+/* add border for last row in tables in .md-typeset__table */
+.md-typeset__table table tr:last-child td {
+    border-bottom: 1px solid #ddd;
+  }
+/* remove first row from tables in .md-typeset__table */
+.md-typeset__table table thead {
+    display: none;
+  }
+
+.md-typeset h1 {
+    color: var(--md-default-fg-color)
+  }

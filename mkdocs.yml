@@ -1,14 +1,13 @@
 site_name: Cookbook
 site_url: http://recipes.paulsaary.de
 
-
-
 theme:
   name: material
   icon:
     repo: fontawesome/brands/github
     logo: fontawesome/solid/bowl-rice
   #favicon: assets/images/favicon.svg
+
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -29,10 +28,9 @@ theme:
 
 markdown_extensions:
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji 
+      emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - tables
-
 
 plugins:
   - search
@@ -41,6 +39,7 @@ plugins:
       minify_js: true
       minify_css: true
       htmlmin_opts:
-          remove_comments: true
+        remove_comments: true
       cache_safe: true
-    
+extra_css:
+  - stylesheets/extra.css
