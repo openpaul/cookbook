@@ -25,3 +25,37 @@
 .md-typeset h1 {
     color: var(--md-default-fg-color)
   }
+
+/* Default styles for cards */
+.my-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  flex: 0 1 calc(33.33% - 10px); /* Adjust the flex-basis for horizontal space */
+  margin: 5px; /* Adjust the margin to 5px for both dimensions */
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .my-card-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card {
+    flex: 0 1 calc(100% - 10px); /* Adjust the flex-basis for horizontal space */
+    margin: 5px; /* Adjust the margin to 5px for both dimensions */
+  }
+}

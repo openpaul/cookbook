@@ -1,0 +1,41 @@
+
+# Pizza Dough
+
+## :salt: Ingredients
+| How much  | What |
+| ----- |------------------ |
+| **450 g** | high protein flour |
+| **12 g**  | salt               |
+| | yeast              |
+| **20 g**  | olive oil          |
+| **270 g** | water              |
+
+##  :cooking: Cookware
+- pizza steel
+- pizza stone
+
+## :pencil: Instructions
+Combine 450 g high protein flour with 12 g salt (~2.5%).
+Add yeast, 20 g olive oil and 270 g water.
+
+**Tip:** If you are using dry yeast, activate it in the water for 10 min before getting started. Just slighlty head the water to 25&deg;C.
+
+Roughly combine ingredients first and let sit for 30 min for autolysis.
+
+Then knead the dough on low for 5 min and then on medium high for an additional 10 min.
+
+Shape the dough into a nice ball, place in a bowl and cover with wet kitchen towl. Let rest for 60 min.
+
+Once the dough has risen to roughly double the size, knead the dough to remove any air and shape into nice ball again.
+Place in bowl and store in fridge for 24-72 hours.
+
+## On baking day
+
+Remove the dough 1 h before baking from the fridge and separate into three equal sized pieces.
+Each should weigh ~240 g.
+
+Shape into small balls and cover with kitchen towl. Let rest to relax the gluten for at least 1 h.
+
+Once ready to bake stretch one dough ball into a pizza and add toppings.
+
+Bake as hot as possible (>220&deg;C) until nice and brown. Ideally on a pizza steel or pizza stone.
