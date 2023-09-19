@@ -1,5 +1,5 @@
 ---
-name: ci
+name: Build and Deploy
 on:
   push:
     branches:
@@ -24,9 +24,21 @@ jobs:
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
           pip install mkdocs mkdocs-material mkdocs-localsearch mkdocs-minify-plugin
 
-      - name: Convert to markdown
+      - name: Convert from .cook to markdown
         run: |
+          # first ensure we have all webp images, ideally this runs locally but best to have it here too
+          bash .github/images_ci.sh cook .github/rescale.sh
+          # now convert to md and include all webp images where needed
           pycook -i cook/ -o docs/
+      
+      - name: Build with mkdocs
+        run : |
+          mkdocs build -c
+      
+      - name: Make gallery
+        run: |
+          # use script to make first page
+          python .github/gallery.py docs abc >> docs/index.md
 
       - name: Build and Upload to Webspace
         env:
@@ -34,7 +46,6 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
         run: |
-          mkdocs build -c
           chmod +x  .github/lftp.sh
           lftp --version
           bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /

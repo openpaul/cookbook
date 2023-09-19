@@ -31,6 +31,9 @@ markdown_extensions:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - tables
+  - md_in_html
+  - attr_list
+  - def_list
 
 plugins:
   - search
@@ -41,5 +44,6 @@ plugins:
       htmlmin_opts:
         remove_comments: true
       cache_safe: true
+
 extra_css:
   - stylesheets/extra.css

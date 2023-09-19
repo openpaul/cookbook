@@ -1,1 +1,6 @@
 site
+*.jpg
+*.png
+*.jpeg
+docs/*/*md
+docs/Baking/
