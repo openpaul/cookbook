@@ -31,15 +31,15 @@ jobs:
           # now convert to md and include all webp images where needed
           pycook -i cook/ -o docs/
       
-      - name: Build with mkdocs
-        run : |
-          mkdocs build -c
-      
       - name: Make gallery
         run: |
           # use script to make first page
           python .github/gallery.py docs abc >> docs/index.md
 
+      - name: Build with mkdocs
+        run : |
+          mkdocs build -c
+          
       - name: Build and Upload to Webspace
         env:
           FTP_USER: ${{ secrets.FTPUSER }}
