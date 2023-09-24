@@ -39,8 +39,8 @@ jobs:
       - name: Build with mkdocs
         run : |
           mkdocs build -c
-          
-      - name: Build and Upload to Webspace
+
+      - name: Upload to Webspace
         env:
           FTP_USER: ${{ secrets.FTPUSER }}
           FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
