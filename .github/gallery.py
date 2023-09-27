@@ -36,7 +36,8 @@ def group_markdown_files_by_folder(markdown_files):
     return grouped_files
 
 def loop_recursivly(data, prefix="", depth=0):
-    for i, (key, value) in enumerate(data.items()):
+    for i, key in enumerate(sorted(list(data.keys()))):
+        value = data[key]
         if isinstance(value, dict) and not key.endswith(".md"):
             if depth > 0 or i > 0:
                 print('</div>\n\n')
