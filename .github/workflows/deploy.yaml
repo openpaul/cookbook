@@ -30,6 +30,9 @@ jobs:
           bash .github/images_ci.sh cook .github/rescale.sh
           # now convert to md and include all webp images where needed
           pycook -i cook/ -o docs/
+
+          # sync all remaining images, for steps etc
+          rsync -av --ignore-existing --include='*.webp' --exclude='*' cook/ docs/
       
       - name: Make gallery
         run: |
