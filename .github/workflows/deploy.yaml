@@ -32,7 +32,7 @@ jobs:
           pycook -i cook/ -o docs/
 
           # sync all remaining images, for steps etc
-          rsync -av --ignore-existing --include='*.webp' --exclude='*' cook/ docs/
+          rsync -av --ignore-existing --include "*/" --include="*.webp"  --exclude="*" cook/ docs/
       
       - name: Make gallery
         run: |
