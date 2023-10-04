@@ -38,6 +38,7 @@ markdown_extensions:
 plugins:
   - search
   - privacy
+  - optimize
   - minify:
       minify_html: true
       minify_js: true
