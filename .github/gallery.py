@@ -36,8 +36,12 @@ def group_markdown_files_by_folder(markdown_files):
     return grouped_files
 
 def loop_recursivly(data, prefix="", depth=0):
-    for i, key in enumerate(sorted(list(data.keys()))):
+    md_keys = sorted([key for key in data.keys() if key.endswith(".md") and len(data[key]) == 0])
+    dict_keys = sorted(list(set(data.keys()) - set(md_keys)))
+    sorted_keys = md_keys + dict_keys
+    for i, key in enumerate(sorted_keys):
         value = data[key]
+
         if isinstance(value, dict) and not key.endswith(".md"):
             if depth > 0 or i > 0:
                 print('</div>\n\n')
