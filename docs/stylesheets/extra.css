@@ -1,0 +1,108 @@
+/* cookbook stylesheet for extra styles */
+
+/* custom style for tables in .md-typeset__table */
+
+.md-typeset__table  table {
+  border: None !important; /* remove border from table */
+}
+
+.md-typeset__table table tr{
+    margin: 0px;
+    padding: 0px 5px 0px  5px !important; /* remove padding from table */
+}
+.md-typeset table:not([class]) td {
+    padding: .3em 1em;
+    font-size: 0.8rem;
+}
+/* add border for last row in tables in .md-typeset__table */
+.md-typeset__table table tr:last-child td {
+    border-bottom: .05rem solid var(--md-typeset-table-color)
+  }
+/* remove first row from tables in .md-typeset__table */
+.md-typeset__table table thead {
+    display: none;
+  }
+
+.md-typeset h1 {
+    color: var(--md-default-fg-color)
+  }
+/* Default styles for cards */
+.my-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left
+}
+.card-link {
+  flex: 0 1 calc(33.33333% - 0.2rem); /* Adjust the flex-basis for horizontal space */
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  margin: 0.1rem; /* Adjust the margin to 5px for both dimensions */
+  border: .05rem solid var(--md-typeset-table-color);
+}
+.card {
+  padding: 0;
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;*/
+  transition: transform 0.2s ease-in-out; 
+  position: relative;
+  overflow: hidden;
+  min-height: 3rem;
+}
+.card:hover {
+  transform: translateY(-0.08rem);
+}
+.card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: left;
+  min-height: 3rem;
+  max-height: 5rem;
+}
+
+h3.card-title {
+  margin: 0 0 auto 0;
+  padding: 0  ;
+  font-size: 1rem; 
+  font-weight: 200;
+  line-height: 1.2rem;
+  max-height: 5rem;
+
+}
+
+
+
+
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  /*.my-card-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }*/
+
+  .card-link {
+    flex: 0 1 calc(50% - 0.1rem); /* Adjust the flex-basis for horizontal space */
+    margin: 0.05rem; /* Adjust the margin to 5px for both dimensions */
+  }
+}

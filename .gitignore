@@ -1,0 +1,10 @@
+site
+*.jpg
+*.png
+*.jpeg
+docs/*/*md
+docs/Baking/
+latex
+*.cook.bak
+*.cook.new
+food_pictures
