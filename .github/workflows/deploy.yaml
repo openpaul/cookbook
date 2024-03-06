@@ -24,7 +24,7 @@ jobs:
         run: |
           sudo apt install -y lftp
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
-          pip install mkdocs mkdocs-material mkdocs-localsearch mkdocs-minify-plugin
+          pip install mkdocs 'mkdocs-material>=9.5.12' mkdocs-localsearch mkdocs-minify-plugin
 
       - name: Convert from .cook to markdown
         run: |
