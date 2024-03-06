@@ -9,6 +9,12 @@ jobs:
   build:
     name: Build cook
     runs-on: ubuntu-latest
+
+    env:
+      LATEX_DOCKER_IMAGE_NAME: "ghcr.io/xu-cheng/texlive-full"
+      LATEX_DOCKER_IMAGE_TAG: "2023080"
+      LATEX_EXPECTED_CHECKSUM: "a21e25265e693dc89238d747bf15d5f575cf2ba7f9e8a33b70408d7d9e1b5c9b"
+
     steps:
       - name: Checkout main
         uses: actions/checkout@v3
@@ -31,12 +37,26 @@ jobs:
         run: |
           pycook -i cook/ -o latex/ -f tex
 
+      # Here we ensure that the docker image we use in the next step wasnt altered by checking the checksum
+      - name: Pull LaTex Docker image
+        run: docker pull ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }}
+
+      - name: Verify checksum
+        run: |
+          expected_checksum="${{ env.LATEX_EXPECTED_CHECKSUM }}"
+          actual_checksum=$(docker inspect --format='{{.RepoDigests}}' ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} | sha256sum | awk '{print $1}')
+          
+          if [ "$expected_checksum" != "$actual_checksum" ]; then
+            echo "Error: Docker image checksum mismatch."
+            exit 1
+          fi
+
       - name: Compile latex to .pdf
         uses: xu-cheng/latex-action@v3
         with:
           root_file: latex/recipes.tex
           latexmk_use_xelatex: true
-          docker_image: ghcr.io/xu-cheng/texlive-full:20230801 # pinned version to avoid issues, can be updated
+          docker_image: ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} # pinned version to avoid issues, can be updated
           post_compile: "mv recipes.pdf site/recipes.pdf"
 
       - name: Convert from .cook to markdown
