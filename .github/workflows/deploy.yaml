@@ -25,6 +25,19 @@ jobs:
           sudo apt install -y lftp
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
           pip install mkdocs 'mkdocs-material>=9.5.12' mkdocs-localsearch mkdocs-minify-plugin
+          mkdir site
+
+      - name: Convert from .cook to .tex
+        run: |
+          pycook -i cook/ -o latex/ -f tex
+
+      - name: Compile latex to .pdf
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: latex/recipes.tex
+          latexmk_use_xelatex: true
+          docker_image: ghcr.io/xu-cheng/texlive-full:20230801 # pinned version to avoid issues, can be updated
+          post_compile: "mv recipes.pdf site/recipes.pdf"
 
       - name: Convert from .cook to markdown
         run: |
@@ -45,17 +58,6 @@ jobs:
         run : |
           mkdocs build -c
       
-      - name: Convert from .cook to .tex
-        run: |
-          pycook -i cook/ -o latex/ -f tex
-
-      - name: Compile latex to .pdf
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: latex/recipes.tex
-          latexmk_use_xelatex: true
-          docker_image: ghcr.io/xu-cheng/texlive-full:20230801 # pinned version to avoid issues, can be updated
-          post_compile: "mv recipes.pdf site/recipes.pdf"
 
       - name: Upload to Webspace
         env:
