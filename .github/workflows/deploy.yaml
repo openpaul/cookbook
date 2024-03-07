@@ -12,7 +12,7 @@ jobs:
 
     env:
       LATEX_DOCKER_IMAGE_NAME: "ghcr.io/xu-cheng/texlive-full"
-      LATEX_DOCKER_IMAGE_TAG: "2023080"
+      LATEX_DOCKER_IMAGE_TAG: "20230801"
       LATEX_EXPECTED_CHECKSUM: "a21e25265e693dc89238d747bf15d5f575cf2ba7f9e8a33b70408d7d9e1b5c9b"
 
     steps:
