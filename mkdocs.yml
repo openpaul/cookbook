@@ -10,7 +10,7 @@ theme:
 
   palette:
     scheme: default
-    primary: green
+    #primary: green
       
   features:
     - navigation.tracking
