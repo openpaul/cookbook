@@ -11,8 +11,6 @@ remote_password="$3"
 remote_host="$4"
 remote_folder="$5"
 
-ping -c 2 $remote_host
-
 SETTINGS="set net:timeout 2; set net:max-retries 2; set net:reconnect-interval-base 2; set ftp:ssl-force yes; set ftp:ssl-protect-data true; set sftp:auto-confirm yes; set ssl:verify-certificate no;"
 # Use lftp to synchronize the folders
 # https://stackoverflow.com/questions/49843692/continuous-deployment-using-lftp-gets-stuck-temporarily-after-about-10-files
