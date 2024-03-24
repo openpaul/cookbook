@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let wakeLock = null;
 
+  
+
   const requestWakeLock = async () => {
     try {
       wakeLock = await navigator.wakeLock.request('screen');      
@@ -28,8 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const releaseWakeLock = () => {
     console.log('Releasing wakeLock');
 
-    wakeLock.release();
-    wakeLock = null;
+    if (wakeLock) {
+      wakeLock.release();
+      wakeLock = null;
+    } 
   };
 
   wakeLockSwitch.addEventListener('change', () => {
