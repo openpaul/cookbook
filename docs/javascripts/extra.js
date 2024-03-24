@@ -1,14 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const wakeLockToggle = document.createElement('input');
-  wakeLockToggle.setAttribute('type', 'checkbox');
-  wakeLockToggle.setAttribute('id', 'wake-lock-toggle');
-
-  const mdContentDivs = document.querySelectorAll('.md-content');
-  const firstMdContentDiv = mdContentDivs[0];
-  const article = firstMdContentDiv.querySelector('article');
-  firstMdContentDiv.insertBefore(wakeLockToggle, article);
-
-  const wakeLockSwitch = document.querySelector('#wake-lock-toggle');
+  
 
   let wakeLock = null;
 
@@ -28,18 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const releaseWakeLock = () => {
-    console.log('Releasing wakeLock');
-
-    if (wakeLock) {
-      wakeLock.release();
-      wakeLock = null;
-    } 
-  };
-
-  wakeLockSwitch.addEventListener('change', () => {
-    const checked = wakeLockSwitch.checked;
-
-    checked ? requestWakeLock() : releaseWakeLock();
-  });
+  requestWakeLock();
+ 
 });
