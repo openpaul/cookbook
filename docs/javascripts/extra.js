@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const wakeLockToggle = document.createElement('button');
   wakeLockToggle.setAttribute('id', 'wake-lock-toggle');
+  wakeLockToggle.textContent = 'Toggle Wake Lock'; // Add text content to the button
+
 
   const mdContentDivs = document.querySelectorAll('.md-content');
   const firstMdContentDiv = mdContentDivs[0];
