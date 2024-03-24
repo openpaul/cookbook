@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const wakeLockToggle = document.createElement('button');
+  const wakeLockToggle = document.createElement('input');
+  wakeLockToggle.setAttribute('type', 'checkbox');
   wakeLockToggle.setAttribute('id', 'wake-lock-toggle');
-  wakeLockToggle.textContent = 'Toggle Wake Lock'; // Add text content to the button
-
 
   const mdContentDivs = document.querySelectorAll('.md-content');
   const firstMdContentDiv = mdContentDivs[0];
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     wakeLock = null;
   };
 
-  wakeLockSwitch.addEventListener('click', () => {
+  wakeLockSwitch.addEventListener('change', () => {
     const checked = wakeLockSwitch.checked;
 
     checked ? requestWakeLock() : releaseWakeLock();
