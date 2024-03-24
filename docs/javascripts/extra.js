@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const wakeLockToggle = document.createElement('input');
-  wakeLockToggle.setAttribute('type', 'checkbox');
+  const wakeLockToggle = document.createElement('button');
   wakeLockToggle.setAttribute('id', 'wake-lock-toggle');
 
   const mdContentDivs = document.querySelectorAll('.md-content');
@@ -14,15 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const requestWakeLock = async () => {
     try {
-      wakeLock = await navigator.wakeLock.request('screen');
-
+      wakeLock = await navigator.wakeLock.request('screen');      
       wakeLock.addEventListener('release', () => {
         console.log('Wake Lock was released');
       });
       console.log('Wake Lock is active');
     }
     catch(err) {
-      console.error(`${err.name}, ${err.message}`);
+      console.error(`Caught ${err.name} acquiring screen lock: ${err.message}`);
     }
   };
 
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     wakeLock = null;
   };
 
-  wakeLockSwitch.addEventListener('change', () => {
+  wakeLockSwitch.addEventListener('click', () => {
     const checked = wakeLockSwitch.checked;
 
     checked ? requestWakeLock() : releaseWakeLock();
