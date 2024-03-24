@@ -1,18 +1,41 @@
-// Function to request a screen wake lock
+document.addEventListener('DOMContentLoaded', () => {
+  const wakeLockToggle = document.createElement('input');
+  wakeLockToggle.setAttribute('type', 'checkbox');
+  wakeLockToggle.setAttribute('id', 'wake-lock-toggle');
 
-const requestWakeLock = async () => {
-  try {
-    wakeLock = await navigator.wakeLock.request('screen');
+  const mdContentDivs = document.querySelectorAll('.md-content');
+  const firstMdContentDiv = mdContentDivs[0];
+  const article = firstMdContentDiv.querySelector('article');
+  firstMdContentDiv.insertBefore(wakeLockToggle, article);
 
-    wakeLock.addEventListener('release', () => {
-      console.log('Wake Lock was released');
-    });
-    console.log('Wake Lock is active');
-  }
-  catch(err) {
-    console.error('Failed with error:', err);
-  }
-};
+  const wakeLockSwitch = document.querySelector('#wake-lock-toggle');
 
-// Call the function to request the screen wake lock
-requestWakeLock();
+  let wakeLock = null;
+
+  const requestWakeLock = async () => {
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+
+      wakeLock.addEventListener('release', () => {
+        console.log('Wake Lock was released');
+      });
+      console.log('Wake Lock is active');
+    }
+    catch(err) {
+      console.error(`${err.name}, ${err.message}`);
+    }
+  };
+
+  const releaseWakeLock = () => {
+    console.log('Releasing wakeLock');
+
+    wakeLock.release();
+    wakeLock = null;
+  };
+
+  wakeLockSwitch.addEventListener('change', () => {
+    const checked = wakeLockSwitch.checked;
+
+    checked ? requestWakeLock() : releaseWakeLock();
+  });
+});
