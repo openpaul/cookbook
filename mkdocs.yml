@@ -6,11 +6,14 @@ theme:
   icon:
     repo: fontawesome/brands/github
     logo: fontawesome/solid/bowl-rice
-  #favicon: assets/images/favicon.svg
+  #logo: icons/icon-128.png
+  favicon: icons/favicon.ico
+  custom_dir: overrides
+
 
   palette:
     scheme: default
-    #primary: green
+    #primary: '#bfece5'
       
   features:
     - navigation.tracking

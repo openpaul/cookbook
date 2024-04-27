@@ -7,6 +7,10 @@ pip install mkdocs\
 # convert images
 bash .github/images_ci.sh cook .github/rescale.sh
 
+
+# compile icons
+bash .github/resize_icons.sh icon.png docs/icons/
+
 # convert md
 pycook -i cook/ -o docs/
 rsync -av --ignore-existing --include "*/" --include="*.webp"  --exclude="*" cook/ docs/
