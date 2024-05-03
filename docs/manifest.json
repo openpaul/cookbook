@@ -1,7 +1,7 @@
 {
-    "theme_color": "#c0e8dd",
-    "background_color": "#ffffff",
-    "display": "fullscreen",
+    "theme_color": "#013e3f",
+    "background_color": "#013e3f",
+    "display": "standalone",
     "scope": "/",
     "start_url": "http://recipes.paulsaary.de",
     "name": "Cookbook",

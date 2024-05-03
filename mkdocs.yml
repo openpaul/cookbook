@@ -3,18 +3,19 @@ site_url: http://recipes.paulsaary.de
 
 theme:
   name: material
-  icon:
-    repo: fontawesome/brands/github
-    logo: fontawesome/solid/bowl-rice
-  #logo: icons/icon-128.png
+  #icon:
+  #  repo: fontawesome/brands/github
+  #  logo: fontawesome/solid/bowl-rice
+  logo: icons/icon-128.png
   favicon: icons/favicon.ico
   custom_dir: overrides
 
 
   palette:
-    scheme: default
-    #primary: '#bfece5'
-      
+    #scheme: default
+    scheme: otter
+
+
   features:
     - navigation.tracking
     - navigation.expand

@@ -1,3 +1,20 @@
+[data-md-color-scheme="otter"] {
+  --md-primary-fg-color:        #013e3f;
+  --md-primary-fg-color--light: #4d8485;
+  --md-primary-fg-color--dark:  #013e3f;
+  --md-typeset-a-color: #013e3f;
+  --md-accent-fg-color: #0e9395;
+}
+
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+  height: 2.5rem
+}
+.md-header__button.md-logo {
+  margin: 0;
+  padding: 0;
+}
+
+
 /* cookbook stylesheet for extra styles */
 
 /* custom style for tables in .md-typeset__table */
