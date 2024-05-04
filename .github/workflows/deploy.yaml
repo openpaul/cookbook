@@ -88,8 +88,17 @@ jobs:
         run: |
           IPADDR=$(nslookup ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
           echo $IPADDR
+          
           echo ${SSHKEY} > .key; chmod 600 .key;
-          scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webroot/recipes/
+
+          # Check if IPADDR is an IPv6 address
+          if [[ "$IPADDR" =~ .*:.* ]]; then
+              # IPADDR is an IPv6 address
+              scp -6 -i "$KEYFILE" -o StrictHostKeyChecking=no -P "$SSHPORT" -r "$SOURCE_DIR" "${SSHUSER}@[${IPADDR}]${DEST_DIR}"
+          else
+              # IPADDR is an IPv4 address
+              scp -i "$KEYFILE" -o StrictHostKeyChecking=no -P "$SSHPORT" -r "$SOURCE_DIR" "${SSHUSER}@${IPADDR}${DEST_DIR}"
+          fi
           rm .key
 
       #- name: Upload to Webspace
