@@ -85,23 +85,12 @@ jobs:
           SSHKEY: ${{ secrets.SSHKEY }}
           SSHUSER: ${{ secrets.SSHUSER }}
           SSHPORT: ${{ secrets.PORT }}
-          SOURCE_DIR: site
         run: |
-          IPADDR=$(nslookup ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
+          IPADDR=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
           echo $IPADDR
           
           echo ${SSHKEY} > .key; chmod 600 .key;
-          
-          DEST_DIR="/home/${SSHUSER}/webroot/recipes/"
-
-          # Check if IPADDR is an IPv6 address
-          if [[ "$IPADDR" =~ .*:.* ]]; then
-              # IPADDR is an IPv6 address
-              scp -6 -i .key -o StrictHostKeyChecking=no -P "$SSHPORT" -r "$SOURCE_DIR" "${SSHUSER}@[${IPADDR}]${DEST_DIR}"
-          else
-              # IPADDR is an IPv4 address
-              scp -i .key -o StrictHostKeyChecking=no -P "$SSHPORT" -r "$SOURCE_DIR" "${SSHUSER}@${IPADDR}${DEST_DIR}"
-          fi
+          scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webroot/recipes/
           rm .key
 
       #- name: Upload to Webspace
