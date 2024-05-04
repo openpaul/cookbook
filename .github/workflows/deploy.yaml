@@ -93,7 +93,7 @@ jobs:
           echo "${SSHKEY}" > .key; 
           chmod 600 .key;
           ls ;
-          scp -v -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webspace/recipes/
+          scp -vv -i .key -o StrictHostKeyChecking=no -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webspace/recipes/
           rm .key
 
       #- name: Upload to Webspace
