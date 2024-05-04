@@ -90,8 +90,9 @@ jobs:
           echo $IPADDR
           IPADDR="83.83.180.46"
           
-          echo ${SSHKEY} > .key; chmod 600 .key;
-          scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webspace/recipes/
+          echo "${SSHKEY}" > .key; 
+          chmod 600 .key;
+          scp -v -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webspace/recipes/
           rm .key
 
       #- name: Upload to Webspace
