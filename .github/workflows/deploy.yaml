@@ -88,6 +88,7 @@ jobs:
         run: |
           IPADDR=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
           echo $IPADDR
+          IPADDR="83.83.180.46"
           
           echo ${SSHKEY} > .key; chmod 600 .key;
           scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webroot/recipes/
