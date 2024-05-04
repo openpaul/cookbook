@@ -86,7 +86,8 @@ jobs:
           SSHUSER: ${{ secrets.SSHUSER }}
           SSHPORT: ${{ secrets.PORT }}
         run: |
-          IPADDR=$(nslookup ${SERVER} 8.8.8.8 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
+          IPADDR=$(nslookup ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
+          echo $IPADDR
           echo ${SSHKEY} > .key; chmod 600 .key;
           scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webroot/recipes/
           rm .key
