@@ -87,8 +87,9 @@ jobs:
           SSHPORT: ${{ secrets.PORT }}
         run: |
           ping -c 2 ${SERVER}
+          IPADDR=$(nslookup ${SERVER} 8.8.8.8 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
           echo ${SSHKEY} > .key; chmod 600 .key;
-          scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${SERVER}:/home/${SSHUSER}/webroot/recipes/
+          scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webroot/recipes/
           rm .key
 
       #- name: Upload to Webspace
