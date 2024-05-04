@@ -83,7 +83,7 @@ jobs:
         env:
           SERVER: ${{ secrets.SERVER }}
           SSHKEY: ${{ secrets.SSHKEY }}
-          SSHUSER: ${{ secrets.SSHUSER }}
+          SSHUSER: githubci
           SSHPORT: ${{ secrets.PORT }}
         run: |
           IPADDR=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
