@@ -79,12 +79,23 @@ jobs:
           docker_image: ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} # pinned version to avoid issues, can be updated
           post_compile: "mv recipes.pdf site/recipes.pdf"
 
-      - name: Upload to Webspace
+      - name: Upload
         env:
-          FTP_USER: ${{ secrets.FTPUSER }}
-          FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
           SERVER: ${{ secrets.SERVER }}
+          SSHKEY: ${{ secrets.SSHKEY }}
+          SSHUSER: ${{ secrets.SSHUSER }}
+          SSHPORT: ${{ secrets.PORT }}
         run: |
-          chmod +x  .github/lftp.sh
-          lftp --version
-          bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
+          echo ${SSHKEY} > .key; chmod 600 .key;
+          scp  -i .key -o StrictHostKeyChecking=no  -P ${SSHPORT} -r site ${SSHUSER}@${SERVER}:/home/${SSHUSER}/webroot/recipes/
+          rm .key
+
+      #- name: Upload to Webspace
+      #  env:
+      #    FTP_USER: ${{ secrets.FTPUSER }}
+      #    FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
+      #    SERVER: ${{ secrets.SERVER }}
+      #  run: |
+      #    chmod +x  .github/lftp.sh
+      #    lftp --version
+      #    bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /

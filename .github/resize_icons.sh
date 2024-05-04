@@ -34,7 +34,7 @@ fi
 mkdir -p "$output_path"
 
 # List of target icon sizes for PNG
-icon_sizes=(72 96 128 144 152 192 384 512)
+icon_sizes=(72 96 128 144 152 167 180 192 384 512)
 
 # List of target icon sizes for favicon (ico)
 favicon_sizes=(16 32 48 64)
