@@ -87,7 +87,7 @@ jobs:
           SSHPORT: ${{ secrets.PORT }}
         run: |
           IPADDR=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
-          IPADDR2=$(dig @1.1.1.1 recipes.paulsaary.de | grep '^;; ANSW' -A 1  | tail -n 1 | cut -f 5)
+          IPADDR2=$(dig @1.1.1.1 ${SERVER} | grep '^;; ANSW' -A 1  | tail -n 1 | cut -f 5)
           echo "nslooup at 9.9.9.9: $IPADDR"
           echo "dig at 1.1.1.1: $IPADDR2"
           
