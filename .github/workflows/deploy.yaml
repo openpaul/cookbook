@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt install -y lftp
+          sudo apt install -y lftp rsync
           python -m pip install 'pycook @ git+https://github.com/openpaul/pycook'
           pip install mkdocs 'mkdocs-material>=9.5.12' mkdocs-localsearch mkdocs-minify-plugin
           mkdir site
@@ -93,7 +93,9 @@ jobs:
           echo "${SSHKEY}" > .key; 
           chmod 600 .key;
           ls ;
-          scp -vv -i .key -o StrictHostKeyChecking=no -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
+          #scp -vv -i .key -o StrictHostKeyChecking=no -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
+          rsync -avz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
+
           rm .key
 
       #- name: Upload to Webspace
