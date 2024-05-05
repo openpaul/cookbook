@@ -94,7 +94,7 @@ jobs:
           chmod 600 .key;
           ls ;
           #scp -vv -i .key -o StrictHostKeyChecking=no -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
-          rsync -avz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
+          rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
 
           rm .key
 
