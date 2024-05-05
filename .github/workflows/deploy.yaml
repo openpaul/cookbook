@@ -38,18 +38,18 @@ jobs:
           pycook -i cook/ -o latex/ -f tex
 
       # Here we ensure that the docker image we use in the next step wasnt altered by checking the checksum
-      #- name: Pull LaTex Docker image
-      #  run: docker pull ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }}
+      - name: Pull LaTex Docker image
+        run: docker pull ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }}
 
-      #- name: Verify checksum
-      #  run: |
-      #    expected_checksum="${{ env.LATEX_EXPECTED_CHECKSUM }}"
-      #    actual_checksum=$(docker inspect --format='{{.RepoDigests}}' ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} | sha256sum | awk '{print $1}')
-      #    
-      #    if [ "$expected_checksum" != "$actual_checksum" ]; then
-      #      echo "Error: Docker image checksum mismatch."
-      #      exit 1
-      #    fi
+      - name: Verify checksum
+        run: |
+          expected_checksum="${{ env.LATEX_EXPECTED_CHECKSUM }}"
+          actual_checksum=$(docker inspect --format='{{.RepoDigests}}' ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} | sha256sum | awk '{print $1}')
+          
+          if [ "$expected_checksum" != "$actual_checksum" ]; then
+            echo "Error: Docker image checksum mismatch."
+            exit 1
+          fi
 
       
       - name: Convert from .cook to markdown
@@ -71,13 +71,13 @@ jobs:
         run : |
           mkdocs build -c
       
-      #- name: Compile latex to .pdf
-      #  uses: xu-cheng/latex-action@v3
-      #  with:
-      #    root_file: latex/recipes.tex
-      #    latexmk_use_xelatex: true
-      #    docker_image: ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} # pinned version to avoid issues, can be updated
-      #    post_compile: "mv recipes.pdf site/recipes.pdf"
+      - name: Compile latex to .pdf
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: latex/recipes.tex
+          latexmk_use_xelatex: true
+          docker_image: ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} # pinned version to avoid issues, can be updated
+          post_compile: "mv recipes.pdf site/recipes.pdf"
 
       - name: Upload
         env:
@@ -87,23 +87,12 @@ jobs:
           SSHPORT: ${{ secrets.PORT }}
         run: |
           IPADDR=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
-          echo $IPADDR
+          IPADDR2=$(dig @1.1.1.1 recipes.paulsaary.de | grep '^;; ANSW' -A 1  | tail -n 1 | cut -f 5)
+          echo "nslooup at 9.9.9.9: $IPADDR"
+          echo "dig at 1.1.1.1: $IPADDR2"
           IPADDR="83.83.180.46"
           
           echo "${SSHKEY}" > .key; 
           chmod 600 .key;
-          ls ;
-          #scp -vv -i .key -o StrictHostKeyChecking=no -P ${SSHPORT} -r site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
           rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
-
           rm .key
-
-      #- name: Upload to Webspace
-      #  env:
-      #    FTP_USER: ${{ secrets.FTPUSER }}
-      #    FTP_PASSWORD: ${{ secrets.FTPPASSWORD }}
-      #    SERVER: ${{ secrets.SERVER }}
-      #  run: |
-      #    chmod +x  .github/lftp.sh
-      #    lftp --version
-      #    bash .github/lftp.sh site ${FTP_USER} ${FTP_PASSWORD} ${SERVER} /
