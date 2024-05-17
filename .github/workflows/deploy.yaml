@@ -85,10 +85,11 @@ jobs:
           SSHUSER: githubci
           SSHPORT: ${{ secrets.PORT }}
         run: |
-          IPADDR1=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
-          IPADDR2=$(dig @1.1.1.1 ${SERVER} | grep '^;; ANSW' -A 1  | tail -n 1 | cut -f 5)
-          echo "nslooup at 9.9.9.9: $IPADDR1"
-          echo "dig at 1.1.1.1: $IPADDR2"
+          IPADDR1=$(dig +short @1.1.1.1 ${SERVER})
+          IPADDR2=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
+          echo "dig at 1.1.1.1: $IPADDR1"
+          echo "nslooup at 9.9.9.9: $IPADDR2"
+
 
           # check if IPADDR is an ipv4 address
           # function
