@@ -120,5 +120,5 @@ jobs:
 
           echo "${SSHKEY}" > .key; 
           chmod 600 .key;
-          rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR2}:/home/githubci/webspace/recipes/
+          rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/githubci/webspace/recipes/
           rm .key
