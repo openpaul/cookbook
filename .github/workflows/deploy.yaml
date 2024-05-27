@@ -62,7 +62,7 @@ jobs:
         env:
           SERVER: ${{ secrets.SERVER }}
           SSHKEY: ${{ secrets.SSHKEY }}
-          SSHUSER: githubci
+          SSHUSER: ${{ secrets.SSHUSER }}
           SSHPORT: ${{ secrets.PORT }}
           SECRET1: ${{ secrets.SECRET1 }}
           URL1: ${{ secrets.URL1 }}
