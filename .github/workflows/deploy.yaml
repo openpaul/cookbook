@@ -90,11 +90,13 @@ jobs:
           }
           echo "${SSHKEY}" > .key; 
           chmod 600 .key;
-          
+
           if valid_ip $IPADDR; then
+            echo "This is IP v4"
             rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webspace/recipes/
           else
-            rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@\[${IPADDR}\]:/home/${SSHUSER}/webspace/recipes/
+            echo "This is IPv6"
+            rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT} -6" site ${SSHUSER}@\[${IPADDR}\]:/home/${SSHUSER}/webspace/recipes/
           fi
 
           
