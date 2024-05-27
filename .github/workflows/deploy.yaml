@@ -37,19 +37,7 @@ jobs:
         run: |
           pycook -i cook/ -o latex/ -f tex
 
-      # Here we ensure that the docker image we use in the next step wasnt altered by checking the checksum
-      - name: Pull LaTex Docker image
-        run: docker pull ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }}
-
-      - name: Verify checksum
-        run: |
-          expected_checksum="${{ env.LATEX_EXPECTED_CHECKSUM }}"
-          actual_checksum=$(docker inspect --format='{{.RepoDigests}}' ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} | sha256sum | awk '{print $1}')
-
-          if [ "$expected_checksum" != "$actual_checksum" ]; then
-            echo "Error: Docker image checksum mismatch."
-            exit 1
-          fi
+     
 
       - name: Convert from .cook to markdown
         run: |
@@ -70,14 +58,6 @@ jobs:
         run: |
           mkdocs build -c
 
-      - name: Compile latex to .pdf
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: latex/recipes.tex
-          latexmk_use_xelatex: true
-          docker_image: ${{ env.LATEX_DOCKER_IMAGE_NAME }}:${{ env.LATEX_DOCKER_IMAGE_TAG }} # pinned version to avoid issues, can be updated
-          post_compile: "mv recipes.pdf site/recipes.pdf"
-
       - name: Upload
         env:
           SERVER: ${{ secrets.SERVER }}
@@ -85,6 +65,7 @@ jobs:
           SSHUSER: githubci
           SSHPORT: ${{ secrets.PORT }}
           SECRET1: ${{ secrets.SECRET1 }}
+          URL1: ${{ secrets.URL1 }}
         run: |
           IPADDR=$(curl -G -d "password=${SECRET1}" ${URL1})
           
