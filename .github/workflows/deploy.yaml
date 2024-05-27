@@ -84,12 +84,10 @@ jobs:
           SSHKEY: ${{ secrets.SSHKEY }}
           SSHUSER: githubci
           SSHPORT: ${{ secrets.PORT }}
+          SECRET1: ${{ secrets.SECRET1 }}
         run: |
-          IPADDR1=$(dig +short @1.1.1.1 ${SERVER})
-          IPADDR2=$(nslookup -q=A ${SERVER} 9.9.9.9 | grep -Eo 'Address: [^ ]+$' | tail -1 | awk '{print $2}') 
-          echo "dig at 1.1.1.1: $IPADDR1"
-          echo "nslooup at 9.9.9.9: $IPADDR2"
-
+          IPADDR=$(curl -G -d "password=${SECRET1}" ${URL1})
+          
 
           # check if IPADDR is an ipv4 address
           # function
@@ -110,13 +108,10 @@ jobs:
             return $stat
           }
 
-          if valid_ip $IPADDR1; then
-            IPADDR=$IPADDR1
-          elif valid_ip $IPADDR2; then
-            IPADDR=$IPADDR2
+          if valid_ip $IPADDR; then
+            IPADDR=$IPADDR
           else
-            echo "Error: Could not resolve IP address"
-            exit 1
+            IPADDR="\[${IPADDR}\]"
           fi
 
           echo "${SSHKEY}" > .key; 
