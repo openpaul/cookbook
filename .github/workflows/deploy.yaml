@@ -88,14 +88,14 @@ jobs:
             fi
             return $stat
           }
-
-          if valid_ip $IPADDR; then
-            IPADDR=$IPADDR
-          else
-            IPADDR="\[${IPADDR}\]"
-          fi
-
           echo "${SSHKEY}" > .key; 
           chmod 600 .key;
-          rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webspace/recipes/
+          
+          if valid_ip $IPADDR; then
+            rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@${IPADDR}:/home/${SSHUSER}/webspace/recipes/
+          else
+            rsync -avvvz -e "ssh -i .key -o StrictHostKeyChecking=no -p ${SSHPORT}" site ${SSHUSER}@\[${IPADDR}\]:/home/${SSHUSER}/webspace/recipes/
+          fi
+
+          
           rm .key
