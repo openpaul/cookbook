@@ -1,5 +1,7 @@
 #sudo apt install hugo
 pyenv activate 
+git restore docs/index.md
+
 pip install mkdocs\
             mkdocs-material \
             mkdocs-minify-plugin 
@@ -16,4 +18,5 @@ pycook -i cook/ -o docs/
 rsync -av --ignore-existing --include "*/" --include="*.webp"  --exclude="*" cook/ docs/
 python .github/gallery.py docs abc >> docs/index.md
 mkdocs build -c
-mkdocs serve
+rsync -zva site $USER@ginger:/var/www/recipes/
+#mkdocs serve
