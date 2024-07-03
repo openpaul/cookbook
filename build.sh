@@ -11,7 +11,7 @@ bash .github/images_ci.sh cook .github/rescale.sh
 
 
 # compile icons
-bash .github/resize_icons.sh icon.png docs/icons/
+#bash .github/resize_icons.sh icon.png docs/icons/
 
 # convert md
 pycook -i cook/ -o docs/
@@ -20,3 +20,4 @@ python .github/gallery.py docs abc >> docs/index.md
 mkdocs build -c
 rsync -zva site $USER@ginger:/var/www/recipes/
 #mkdocs serve
+git restore docs
