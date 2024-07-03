@@ -52,7 +52,7 @@ jobs:
       - name: Make gallery
         run: |
           # use script to make first page
-          python .github/gallery.py docs abc >> docs/index.md
+          python .github/gallery.py cook >> docs/index.md
 
       - name: Build Webpage with mkdocs
         run: |

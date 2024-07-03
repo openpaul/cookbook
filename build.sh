@@ -16,8 +16,9 @@ bash .github/images_ci.sh cook .github/rescale.sh
 # convert md
 pycook -i cook/ -o docs/
 rsync -av --ignore-existing --include "*/" --include="*.webp"  --exclude="*" cook/ docs/
-python .github/gallery.py docs abc >> docs/index.md
+python .github/gallery.py cook >> docs/index.md
 mkdocs build -c
 rsync -zva site $USER@ginger:/var/www/recipes/
 #mkdocs serve
 git restore docs
+rm -rf site
