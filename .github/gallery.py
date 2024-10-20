@@ -2,14 +2,12 @@ import os
 import argparse
 from typing import List
 import os
-from typing import Dict, List, Union
+from typing import  List
 
-from numpy import deprecate_with_doc
-from regex import R
 from pydantic import BaseModel
 
 import os
-from typing import Dict, List, Union
+from typing import List
 
 DEFAULT_IMAGE = "default.webp"
 
