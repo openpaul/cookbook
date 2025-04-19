@@ -28,9 +28,9 @@ find "$folder_path" -type f -name "*.cook" | while read -r cook_file; do
   fi
 
   # Check if there is no .webp file with the same name
-  #if [ ! -f "$base_name.webp" ]; then
+  if [ ! -f "$base_name.webp" ]; then
     # Call the rescale.sh script with the required arguments
     "$rescale_script_path" "${base_name}${image_suffix}" "$base_name"
     echo "Rescaled: $cook_file -> $base_name.webp"
-  #fi
+  fi
 done
